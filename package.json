@@ -2,16 +2,19 @@
   "name": "rollup",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "build": "rollup -c --bundleConfigAsCjs"
+    "build": "rollup -c "
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@rollup/plugin-alias": "^5.1.0",
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-replace": "^5.0.5",
     "lodash": "^4.17.21",
     "rollup": "^4.9.2"
   }

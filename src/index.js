@@ -1,6 +1,2 @@
-// src/index.js
-import { add } from "./util";
-import { merge } from "lodash";
-console.log(merge);
-console.log(add(1, 2));
-
+const __TEST__ = 1
+console.log(process.env.DEBUG)

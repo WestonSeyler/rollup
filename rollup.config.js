@@ -4,34 +4,27 @@
 /**
  * @type { import('rollup').RollupOptions }
  */
-import path from 'path'
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
+import alias from '@rollup/plugin-alias';
+import replace from '@rollup/plugin-replace';
 const buildOptions = {
     input: ["src/index.js"],
     output: {
-        // 产物输出目录
-        dir: path.resolve(__dirname, 'dist'),
-        // 产物格式
-        format: "cjs",
-        chunkFileNames: 'chunk-[hash].js',
-        // 静态资源文件输出文件名
-        assetFileNames: 'assets/[name]-[hash][extname]',
-        // 产物输出格式，包括`amd`、`cjs`、`es`、`iife`、`umd`、`system`
-        format: 'cjs',
-        // 是否生成 sourcemap 文件
-        sourcemap: true,
-        // 如果是打包出 iife/umd 格式，需要对外暴露出一个全局变量，通过 name 配置变量名
-        name: 'MyBundle',
-        // 全局变量声明
-        globals: {
-            // 项目中可以直接用`$`代替`jquery`
-            jquery: '$'
-        }
+        dir: 'output',
+        format: 'cjs'
     },
     plugins: [
-        resolve(),
-        commonjs()
+        alias({
+            entries: [
+                // 将把 import xxx from 'module-a' 
+                // 转换为 import xxx from './module-a'
+                { find: 'module-a', replacement: '../module-a.js' },
+            ]
+        }),
+        replace({
+            'process.env.DEBUG': 'false'
+        })
     ]
 };
 
